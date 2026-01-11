@@ -1,0 +1,7 @@
+{
+  "name": "Zenith Tracker 2.0",
+  "description": "A modern, calming student-focused habit and mental health tracking application designed to improve discipline and well-being through daily reflections and physical health monitoring.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

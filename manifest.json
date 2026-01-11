@@ -1,0 +1,18 @@
+
+{
+  "name": "Zenith Tracker",
+  "short_name": "Zenith",
+  "description": "Student-focused habit and mental health tracker.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F8FAFC",
+  "theme_color": "#6366f1",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/5968/5968292.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
