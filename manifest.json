@@ -1,18 +1,48 @@
 
 {
-  "name": "Zenith Tracker",
+  "name": "Zenith Tracker Pro",
   "short_name": "Zenith",
-  "description": "Student-focused habit and mental health tracker.",
+  "description": "Premium student habit and mental health tracking for peak performance.",
   "start_url": "./index.html",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "minimal-ui"],
+  "orientation": "portrait",
   "background_color": "#F8FAFC",
   "theme_color": "#6366f1",
+  "categories": ["productivity", "health", "lifestyle"],
   "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/5968/5968292.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "https://cdn-icons-png.flaticon.com/512/5968/5968292.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Add Habit",
+      "url": "./#/habits?add=true",
+      "icons": [{ "src": "https://cdn-icons-png.flaticon.com/512/5968/5968292.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Wellness Check",
+      "url": "./#/wellness",
+      "icons": [{ "src": "https://cdn-icons-png.flaticon.com/512/5968/5968292.png", "sizes": "192x192" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "https://images.unsplash.com/photo-1616469829581-73993eb86b02?q=80&w=1000&auto=format&fit=crop",
+      "sizes": "1000x2000",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "Zenith Dashboard"
     }
   ]
 }
