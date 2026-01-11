@@ -3,121 +3,109 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="theme-color" content="#6366f1">
+  
+  <!-- Native App Meta Tags -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+  
   <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/5968/5968292.png">
+  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE4MCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjE4MCIgaGVpZ2h0PSIxODAiIHJ4PSI0MCIgZmlsbD0iIzYzNjZGMTkiLz48cGF0aCBkPSJNNDAgNjBIMTQwTDYwIDEyMEgxNDAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==">
   <title>Zenith Tracker</title>
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-          },
-          borderRadius: {
-            '4xl': '2rem',
-            '5xl': '2.5rem',
-          }
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          borderRadius: { '4xl': '2rem', '5xl': '2.5rem' }
         }
       }
     }
   </script>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
   <style>
-    :root {
-      --indigo-glow: rgba(99, 102, 241, 0.15);
-    }
+    /* Full Native Experience Styles */
+    :root { --indigo-glow: rgba(99, 102, 241, 0.15); }
     
-    /* Prevent text selection and blue highlight on mobile */
     * {
       -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
       user-select: none;
+      outline: none !important;
     }
     
-    input, textarea {
-      user-select: text;
-    }
+    input, textarea { user-select: text; -webkit-user-select: text; }
 
     body {
       font-family: 'Inter', sans-serif;
-      transition: background-color 0.4s ease;
-      overscroll-behavior-y: contain; /* Prevents pull-to-refresh on mobile browsers */
+      overscroll-behavior: none; /* Disables browser-style pull-to-refresh */
+      background-color: #F8FAFC;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
     }
 
-    .glass {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-    
-    .dark .glass {
-      background: rgba(15, 23, 42, 0.7);
-    }
-
-    .hide-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-    
-    .hide-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-    
-    /* Mobile Safe Area Padding for Bottom Nav */
-    .pb-safe {
+    /* Handling Android/iOS Safe Areas (Notches) */
+    #root {
+      height: 100%;
+      width: 100%;
+      padding-top: env(safe-area-inset-top);
       padding-bottom: env(safe-area-inset-bottom);
     }
 
-    @keyframes nav-indicator {
-      0% { transform: scaleX(0.5); opacity: 0; }
-      100% { transform: scaleX(1); opacity: 1; }
+    .glass {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
     
-    .nav-indicator-active {
-      animation: nav-indicator 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    }
+    .dark .glass { background: rgba(15, 23, 42, 0.85); }
 
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Haptic Feedback Animation */
     .btn-press:active {
-      transform: scale(0.94);
+      transform: scale(0.95);
+      opacity: 0.7;
       transition: transform 0.1s ease;
     }
 
-    input[type='range']::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 24px;
-      height: 24px;
-      background: #6366f1;
-      border-radius: 50%;
-      border: 4px solid white;
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    /* Android Style Transitions */
+    .page-transition {
+      animation: slideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
     }
-    
-    .dark input[type='range']::-webkit-slider-thumb {
-      border-color: #0f172a;
+
+    @keyframes slideIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
   </style>
-<script type="importmap">
-{
-  "imports": {
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-router-dom": "https://esm.sh/react-router-dom@^7.12.0",
-    "recharts": "https://esm.sh/recharts@^3.6.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+
+  <script type="importmap">
+  {
+    "imports": {
+      "react/": "https://esm.sh/react@^19.2.3/",
+      "react": "https://esm.sh/react@^19.2.3",
+      "react-router-dom": "https://esm.sh/react-router-dom@^7.12.0",
+      "recharts": "https://esm.sh/recharts@^3.6.0",
+      "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+    }
   }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
+  </script>
 </head>
-<body class="bg-[#F8FAFC] dark:bg-slate-950 text-slate-900 dark:text-slate-100 overflow-x-hidden">
+<body class="bg-[#F8FAFC] dark:bg-slate-950 text-slate-900 dark:text-slate-100">
   <div id="root"></div>
-<script type="module" src="/index.tsx"></script>
 </body>
 </html>
